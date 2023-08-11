@@ -1,10 +1,5 @@
 export const environment = {
-    apiBase:"",  
-PROPERTY_ENDPOINT:"https://nexa-capital.onrender.com/api/property/",
-ENQUIRY_ENDPOINT:"https://nexa-capital.onrender.com/api/enquery/"
-
-
-
-
-
+    apiBase: "",
+    PROPERTY_ENDPOINT: "https://wellkin-backend-dev.azurewebsites.net/api/property/",
+    ENQUIRY_ENDPOINT: "https://wellkin-backend-dev.azurewebsites.net/api/enquery/"
 }
