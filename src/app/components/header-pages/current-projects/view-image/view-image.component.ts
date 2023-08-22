@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonService } from 'src/app/shared/common.service';
-
+import { environment } from 'src/app/env/env';
 @Component({
   selector: 'app-view-image',
   templateUrl: './view-image.component.html',
@@ -14,6 +14,7 @@ import { CommonService } from 'src/app/shared/common.service';
 export class ViewImageComponent implements OnInit {
   enquiryForm!: FormGroup;
 public imageData:any
+public imageUrl =environment.STORAGEDEV_LINK
 public propertyInfo:any
 public propertyId:any
 public galleryImage:any
@@ -21,25 +22,53 @@ public MapImage:any
 public divisionPlan:any 
 public isTouch:boolean = false;
 public property:any
-
+public userAmountList=[
+  {
+    Amount: "$50,000 or below",
+  },
+  {
+    Amount: "$50,000 to $100,000",
+  },
+  {
+    Amount: "$100,000 to $150,000",
+  },
+  {
+    Amount: "$150,000 to $200,000",
+  },
+  {
+    Amount: "$200,000 to $250,000",
+  },
+  {
+    Amount: "$250,000 to $300,000",
+  },
+  {
+    Amount: "$300,000 to $400,000",
+  },
+  {
+    Amount: "$400,000 to $500,000",
+  },
+  {
+    Amount: "$500,000 or more",
+  }
+]
   constructor(private _fb: FormBuilder,   private router:ActivatedRoute,private _commonService: CommonService,public spinner:NgxSpinnerService){
 
   }
 
   ngOnInit(): void {
-    debugger
+   
     this.enquiryForm = this._fb.group({
       "full_name": ["",Validators.required],
         "user_email":["",[Validators.required,Validators.email]] ,
         "contact_no":["",Validators.required],
         "location": ["",Validators.required],
         "description":[""],
-        "property_id": ["",]
-      
+        "property_id": ["",],
+        "invest":['',Validators.required]
     });
     
     this.router.paramMap.subscribe((params)=>{
-      debugger
+     
       console.log(params)
     console.log(params.get('queryParams'))
     this.propertyId = params.get('queryParams')
@@ -125,8 +154,9 @@ this.galleryImage.push(element)
             "user_email":this.enquiryForm.controls["user_email"].value,
             "contact_no": this.enquiryForm.controls["contact_no"].value,
              "location": this.enquiryForm.controls["location"].value ,
-             "description":null,
-            "property_id": this.propertyId
+             "description":this.enquiryForm.controls["description"].value ,
+            "property_id": this.propertyId,
+            "invest":this.enquiryForm.controls["invest"].value
         }
      }
        this._commonService

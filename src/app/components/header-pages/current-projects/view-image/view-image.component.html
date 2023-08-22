@@ -13,9 +13,6 @@
 </section>
 
 
-
-
-
 <section>
   <div class="container py-5">
     <div class="row justify-content-center">
@@ -27,18 +24,15 @@
           <div class="text-center">
             <p style="text-align: center; color:#385548;font-size: 16px;">{{propertyInfo[0].desc}}
             </p>
-            <div class="py-3">
-              <button class="btn style2" [hidden]="propertyInfo[0].status !='Trending'" (click)="gotoEnquiryForm()">Enquire</button>
-            </div>
+           
           </div>
       </div>
   </div>
   </div>
 </section>
 
-
-
 <section class="section">
+  <div class="container">
   <div class="details">
     <mat-card>
       <mat-card-header>
@@ -48,57 +42,21 @@
       <mdb-carousel [animation]="'slide'" [interval]="0">
         <mdb-carousel-item *ngFor="let slide of galleryImage ">
           <img style=' width: 100%; object-fit: cover' class="d-block w-100"
-            src="https://welkins-capital-bucket.s3.ap-south-1.amazonaws.com/{{slide.property_img}}" alt="..." />
+            src="{{imageUrl}}{{slide.property_img}}" alt="..." />
         </mdb-carousel-item>
       </mdb-carousel>
     </mat-card>
   </div>
-</section>
-
-
-
-
-
-<section class="section">
-  <div class="details">
-    <mat-card>
-      <mat-card-header>
-        <!-- <h3> <mat-card-title></mat-card-title></h3> -->
-        <!-- <div class="ribbon  ribbon--red">Trending</div> -->
-      </mat-card-header>
+  <div style="text-align:right;padding-top: 5px;">
+    <a  *ngIf="propertyInfo[0].brocher != null" class="btn style2" type="button" href="{{imageUrl}}brochure/{{propertyInfo[0].brocher}}" target="_blank" >Download Full
       
-        <mdb-carousel [animation]="'slide'" [interval]="0">
-          <mdb-carousel-item *ngFor="let slide of MapImage ">
-        <img style=' width: 100%; object-fit: cover' class="d-block w-100"
-          src="https://welkins-capital-bucket.s3.ap-south-1.amazonaws.com/{{slide.property_img}}" alt="..." />
-      </mdb-carousel-item>
-        </mdb-carousel>
       
-    </mat-card>
+      Brochure</a>
   </div>
+</div>
 </section>
 
-<section class="section" *ngIf="divisionPlan.length != 0">
-  <div class="details">
-    <mat-card>
-      <mat-card-header>
-        <!-- <div class="ribbon  ribbon--red">Trending</div> -->
-      </mat-card-header>
-      
-        <mdb-carousel [animation]="'slide'" [interval]="0">
-          <mdb-carousel-item *ngFor="let slide of divisionPlan ">
-            <img style=' width: 100%; object-fit: cover' class="d-block w-100"
-              src="https://welkins-capital-bucket.s3.ap-south-1.amazonaws.com/{{slide.property_img}}" alt="..." />
-          </mdb-carousel-item>
-        </mdb-carousel>
-    
-    </mat-card>
-  </div>
-</section>
-
-
-
-<section class="section" *ngIf="propertyInfo[0].status =='Trending'">
+<section class="section" *ngIf="propertyInfo[0].status !='Closed'">
   <div id ="enquire" class="container">
     <div class="section-contact">
       <div class="row align-items-center">
@@ -137,7 +95,7 @@
               <div class="col-lg-6 col-md-12">
                 <div class="lab-input">
                   <label for="">Contact No.</label>
-                  <input type="tel" class="form-control" placeholder="Please enter your contact no"
+                  <input type="number" class="form-control" placeholder="Please enter your contact no"
                     formControlName="contact_no">
                   <mat-error *ngIf="enquiryForm. get('contact_no')!.hasError('required') && isTouch"> Please Enter
                     Contact No. </mat-error>
@@ -145,7 +103,23 @@
               </div>
 
              
-
+              <div class="col-lg-6 col-md-12">
+                <div class="lab-input">
+                  <label for="">Investment Amount</label>
+                  <input type="text"
+                  placeholder="Pick one Amount Range Ex. $100,000 - $150,000"
+                  class="form-control"
+                  formControlName="invest"
+                  [matAutocomplete]="auto">
+           <mat-autocomplete #auto="matAutocomplete">
+             <mat-option *ngFor="let option of userAmountList " [value]="option.Amount">
+               {{option.Amount}}
+             </mat-option>
+           </mat-autocomplete>
+                  <mat-error *ngIf="enquiryForm. get('invest')!.hasError('required') && isTouch"> Please Enter Investment Amount
+                  </mat-error>
+                </div>
+              </div>
               
               <div class="col-lg-6 col-md-12">
                 <div class="lab-input">
@@ -158,9 +132,22 @@
               </div>
 
               
+
+              <div class="col-lg-6 col-md-12">
+                <div class="lab-input">
+                  <label for="">Comments/Question</label>
+                 
+                    <input class="form-control" formControlName="description">
+                    
+               
+                </div>
+              </div>
+
+              
               <div class="col-lg-12 col-md-12 mt-3">
                 <div class="submit text-center">
-                  <button class="btn style2" type="button"  (click)="onFormSubmit()">Send Enquiry</button>
+                  <button class="btn style2" type="button" style="margin-right: 16px" (click)="onFormSubmit()">Send Enquiry</button>
+                  
                 </div>
               </div>
             </div>

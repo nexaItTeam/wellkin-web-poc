@@ -458,7 +458,7 @@ img {
   background-image: url("../src/assets/images/icons/right-arrow.png")!important;
 }
 .carousel-control-prev-icon {
-  background-image: url("../src/assets/images/icons/left-arrow.png")!important;
+  background-image: url("../src/assets/images/icons/left-arrow1.png")!important;
 }
 // ======= FEATURE SECTION ====== //
 
@@ -646,6 +646,9 @@ img {
 }
 .status-open {
   background-color: rgb(10, 137, 10);
+}
+.status-upcoming{
+  background-color: skyblue
 }
 .h-info-content {
   height: 215px;
@@ -1396,6 +1399,12 @@ a.btn-style3 {
 }
 .ribbon.ribbon--red:after {
   border-top: 1rem solid #12C76D;
+}
+.ribbon.ribbon--darkblue {
+  background: skyblue;
+}
+.ribbon.ribbon--darkblue:after {
+  border-top: 1rem solid skyblue;
 }
 .mat-mdc-card-header {
   display: flex;

@@ -31,7 +31,7 @@
                 <mat-card class="example-card" >
                     <mat-card-header>
                      <h4 class="mat-custom-title" title="{{item.property_name}}"> <mat-card-title>{{item.property_name}}</mat-card-title></h4>
-                     <div  [ngClass]="item.status=='Trending' ? 'ribbon  ribbon--red':'ribbon  ribbon--blue'">{{item.status}}</div>
+                     <div  [ngClass]="item.status=='Trending' ? 'ribbon  ribbon--red': item.status =='Closed' ? 'ribbon  ribbon--blue' : 'ribbon ribbon--darkblue' ">{{item.status}}</div>
                     </mat-card-header> 
                        <!--  <div class="property-img border-radius-0">
                             <img src="../../../assets/images/property/1.jpg" alt="Image">
@@ -41,7 +41,7 @@
                     <ng-container *ngFor="let object of propertyImage">
                       <ng-template [ngIf]="object.prop_id  == item.id">
                       <div class=" property-card style3 h_img">
-                    <img (click)="onpropertyClick(item)" mat-card-image title="Click to view more images" src='https://welkins-capital-bucket.s3.ap-south-1.amazonaws.com/{{object.property_img}}' />
+                    <img (click)="onpropertyClick(item)" mat-card-image title="Click to view more images" src='{{imageURL}}{{object.property_img}}' />
                     <div class="onhover-detail">
                       <a (click)="onpropertyClick(item)">View opportunities</a>
                   </div>

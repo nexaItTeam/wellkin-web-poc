@@ -6,6 +6,7 @@ import { AppPreference } from "../../../../shared/app-preference";
 import { ViewImageComponent } from '../view-image/view-image.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { environment } from 'src/app/env/env';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class ProjectComponent implements OnInit {
   public property: any
 
-
+  public imageURL = environment.STORAGEDEV_LINK
   public propertyImage:any
   /*  public propertyImage:any=[{
     "prop_id":63,
@@ -55,12 +56,20 @@ export class ProjectComponent implements OnInit {
   }
 
   getPropertyLists() {
+    debugger
     this.spinner.show()
     this._commonService.getPropertyList().subscribe({
       next: (res: any) => {
        
        
         this.property = res.getAll.rows;
+        this.property.sort((a:any,b:any) => {
+         
+         if (a.status == "Trending" ) return -1;
+         if (b.status == "Closed" ) return -1;
+
+          return 0;
+      });
         this.spinner.hide()
       },
       error: console.log,

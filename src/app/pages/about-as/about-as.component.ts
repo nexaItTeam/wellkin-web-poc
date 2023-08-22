@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -8,6 +9,9 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./about-as.component.scss']
 })
 export class AboutAsComponent {
+  active = 1;
+  active1 = 1;
+  active2 = 1;
   divbox:any;
   showWarning:boolean =false
   constructor(public route:Router) {}
